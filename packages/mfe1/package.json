@@ -1,25 +1,24 @@
 {
   "name": "mfe1",
-  "version": "0.0.0",
-  "description": "> TODO: description",
+  "version": "1.0.0",
+  "description": "MFE shell",
   "author": "Uday Vunnam <uday4vunnam@gmail.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/mfe1.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve --watch-files ./src"
+  },
+  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "files": [
     "lib"
   ],
-  "scripts": {
-    "serve:dist": "serve ./dist/mfe1 -l 3001",
-    "build": "webpack --config webpack.mfe1.config.js",
-    "start": "webpack-dev-server --config webpack.mfe1.config.js"
-  },
   "dependencies": {
-    "rxjs": "^7.8.1",
-    "useless-lib": "^3.0.0",
-    "webpack": "^5.88.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "useless-lib": "^3.0.0"
   }
 }

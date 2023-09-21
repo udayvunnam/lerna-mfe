@@ -6,9 +6,8 @@
   "homepage": "",
   "license": "MIT",
   "scripts": {
-    "serve:dist": "serve ./dist/shell -l 5000",
-    "build": "webpack --config webpack.shell.config.js",
-    "start": "webpack-dev-server --config webpack.shell.config.js"
+    "build": "webpack",
+    "start": "webpack serve --watch-files ./src"
   },
   "main": "index.js",
   "directories": {
@@ -18,8 +17,8 @@
     "lib"
   ],
   "dependencies": {
-    "rxjs": "^7.8.1",
-    "useless-lib": "^3.0.0",
-    "webpack": "^5.88.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "useless-lib": "^3.0.0"
   }
 }

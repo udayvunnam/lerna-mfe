@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const ModuleFederationPlugin = require('webpack/src/container/ModuleFederationPlugin');
 const deps = require('./package.json').dependencies;
 
 module.exports = {
@@ -35,10 +35,6 @@ module.exports = {
         use: ['babel-loader'],
         exclude: /node_modules/,
       },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
     ],
   },
   plugins: [
@@ -46,11 +42,12 @@ module.exports = {
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
     new ModuleFederationPlugin({
-      name: 'FIRST_APP',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './app': './src/components/App',
+      name: 'host',
+      remotes: {
+        mfe1: 'mfe1@http://localhost:4001/remoteEntry.js',
+        mfe2: 'mfe1@http://localhost:4002/remoteEntry.js',
       },
+      shared: deps,
     }),
   ],
 };
