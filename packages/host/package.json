@@ -1,0 +1,19 @@
+{
+  "name": "host",
+  "version": "0.0.0",
+  "description": "MFE shell",
+  "author": "Uday Vunnam <uday.vunnam@harness.io>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/host.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/host.test.js"
+  }
+}

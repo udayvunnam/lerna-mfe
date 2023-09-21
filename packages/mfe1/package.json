@@ -1,0 +1,19 @@
+{
+  "name": "mfe1",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Uday Vunnam <uday.vunnam@harness.io>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/mfe1.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/mfe1.test.js"
+  }
+}
