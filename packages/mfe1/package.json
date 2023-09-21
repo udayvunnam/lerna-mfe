@@ -2,18 +2,24 @@
   "name": "mfe1",
   "version": "0.0.0",
   "description": "> TODO: description",
-  "author": "Uday Vunnam <uday.vunnam@harness.io>",
+  "author": "Uday Vunnam <uday4vunnam@gmail.com>",
   "homepage": "",
   "license": "MIT",
   "main": "lib/mfe1.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "lib": "lib"
   },
   "files": [
     "lib"
   ],
   "scripts": {
-    "test": "node ./__tests__/mfe1.test.js"
+    "serve:dist": "serve ./dist/mfe1 -l 3001",
+    "build": "webpack --config webpack.mfe1.config.js",
+    "start": "webpack-dev-server --config webpack.mfe1.config.js"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.1",
+    "useless-lib": "^3.0.0",
+    "webpack": "^5.88.2"
   }
 }
