@@ -1,64 +1,56 @@
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const deps = require('./package.json').dependencies;
 
-const shell = {
-  entry: ['./src/main', './src/styles.css'],
+module.exports = {
   mode: 'development',
-  devServer: {
-    contentBase: path.join(__dirname, 'dist/shell'),
-    port: 5000,
+  resolve: {
+    extensions: ['.css', '.scss', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.s?css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: {
+                filter: (url) => {
+                  if (url.startsWith('data:')) {
+                    return false;
+                  }
+                  return true;
+                },
+              },
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
-        test: /\.ts$/,
-        use: 'ts-loader',
+        test: /\.jsx?$/,
+        use: ['babel-loader'],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },
-  resolve: {
-    extensions: ['.ts', '.js'],
-  },
-  output: {
-    publicPath: 'http://localhost:5000/',
-    path: path.join(__dirname, 'dist/shell'),
-    filename: '[name].js',
-  },
   plugins: [
-    new MiniCssExtractPlugin(),
-    new ModuleFederationPlugin({
-      name: 'shell',
-      library: { type: 'var', name: 'shell' },
-      remotes: {
-        mfe1: 'mfe1',
-        mfe2: 'mfe2',
-      },
-      shared: ['rxjs', 'useless-lib'],
-      // shared: {
-      //   "rxjs": {},
-      //   "useless-lib": {
-      //     singleton: true,
-      //   }
-      // },
-      // shared: {
-      //   "rxjs": {},
-      //   "useless-lib": {
-      //     singleton: true,
-      //     strictVersion: true,
-      //   }
-      // },
-    }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: path.resolve(__dirname, 'public', 'index.html'),
+    }),
+    new ModuleFederationPlugin({
+      name: 'FIRST_APP',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './app': './src/components/App',
+      },
     }),
   ],
 };
-
-module.exports = shell;

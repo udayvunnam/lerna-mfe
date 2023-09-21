@@ -4,10 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mfe1 = {
-  entry: './src/main',
+  entry: './lib/main',
   mode: 'development',
   devServer: {
-    contentBase: path.join(__dirname, 'dist/mfe1'),
+    static: path.join(__dirname, 'dist/mfe1'),
     port: 3001,
   },
   module: {
@@ -38,7 +38,7 @@ const mfe1 = {
       library: { type: 'var', name: 'mfe1' },
       filename: 'remoteEntry.js',
       exposes: {
-        './component': './src/component',
+        './component': './lib/component',
       },
       shared: ['rxjs', 'useless-lib'],
       // shared: {
@@ -61,7 +61,7 @@ const mfe1 = {
       // }
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './lib/index.html',
     }),
   ],
 };
